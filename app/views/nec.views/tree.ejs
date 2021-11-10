@@ -1,0 +1,18 @@
+<%- include('../templates/navbar') -%>
+
+  <div class="container-fluid mt-3">
+    <div class="jumbotron">
+         <h3 class="text-center">NEC Pre-Interview Task</h3>
+        <ul class="navbar-nav mt-3 mx-auto">
+          <% for(var i=0; i < output.length; i++) { %>
+            <li class="nav-item">
+              <p class="lead font-weight-light"><strong><%= output[i] %></strong>
+              </p>
+            </li>
+         <% } %>
+        </ul>
+
+    </div>
+  </div>
+
+<%- include('../templates/footer') -%>

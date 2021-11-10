@@ -1,0 +1,31 @@
+{
+	"variables": [],
+	"info": {
+		"name": "NEC",
+		"_postman_id": "1b222f3d-4d5f-450e-8290-ff6e74783386",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "NEC Tree API",
+			"request": {
+				"url": "http://localhost:3000/tree",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"test\",\n\t\"cafe\":\"KFC\",\n\t\"days_worked\":33\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
