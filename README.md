@@ -15,7 +15,8 @@ NEC Pre-Interview Task to print all the node id’s and their corresponding righ
 
 - install all modules first by typing `npm install` or `yarn add`
 
-- to run it please type `npm run start` or `yarn run start` and access http://localhost:3000/ or http://localhost:3000/tree
+- to run it please type `npm start` or `yarn start` and access http://localhost:3000/ or http://localhost:3000/tree
+- to run test case type `npm test`
 
 #### Endpoint Route:
 
@@ -189,6 +190,30 @@ class Tree{
           }
           return root
       }	
+      printer(nodeInstance, node, treeOutput){
+        //Function to find right node to print all the node id’s and their corresponding right node id. 
+        if (nodeInstance.data==node){
+            if(nodeInstance.nextRight==null){
+                const msg= `Node ${node} - No right node`
+                treeOutput.push(msg);
+            }
+            else if(nodeInstance.nextRight!=null){
+                const msg= `Node ${node} - Right node is ${nodeInstance.nextRight.data}`
+                treeOutput.push(msg);
+            }
+        }
+        else if(nodeInstance.data!=node){
+            if(nodeInstance.left!=null){
+            this.printer(nodeInstance.left, node, treeOutput)
+            }
+            if(nodeInstance.middle!=null){
+            this.printer(nodeInstance.middle, node, treeOutput)
+            }
+            if(nodeInstance.right!=null){
+            this.printer(nodeInstance.right, node, treeOutput)
+            }
+        }
+    }
   }
 
 module.exports = { Tree }
@@ -217,7 +242,7 @@ class TreeController extends Model {
         var tree = new treeNodes.Tree(inputData);
         let finalTree= tree.connect(tree.root);
         tree.arrFlat.forEach(node=>{
-            this.printer(finalTree, node)
+          tree.printer(finalTree, node, this.treeOutput)
         });
         resolve(this.treeOutput);
       });      
@@ -235,35 +260,10 @@ class TreeController extends Model {
       var tree = new treeNodes.Tree(inputData); //Build tree
       let finalTree= tree.connect(tree.root);//Function used to link each node with right siblings
       tree.arrFlat.forEach(node=>{
-          this.printer(finalTree, node)
+        tree.printer(finalTree, node, this.treeOutput)
       });
       res.send({ "output": this.treeOutput })      
     });    
-  }
-
-  printer(nodeInstance, node){
-    //Function to find right node to print all the node id’s and their corresponding right node id. 
-      if (nodeInstance.data==node){
-          if(nodeInstance.nextRight==null){
-              const msg= `Node ${node} - No right node`
-              this.treeOutput.push(msg);
-          }
-          else if(nodeInstance.nextRight!=null){
-              const msg= `Node ${node} - Right node is ${nodeInstance.nextRight.data}`
-              this.treeOutput.push(msg);
-          }
-      }
-      else if(nodeInstance.data!=node){
-          if(nodeInstance.left!=null){
-            this.printer(nodeInstance.left, node)
-          }
-          if(nodeInstance.middle!=null){
-            this.printer(nodeInstance.middle, node)
-          }
-          if(nodeInstance.right!=null){
-            this.printer(nodeInstance.right, node)
-          }
-      }
   }
 }
 

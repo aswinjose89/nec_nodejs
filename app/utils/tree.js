@@ -122,6 +122,30 @@ class Tree{
           }
           return root
       }	
+      printer(nodeInstance, node, treeOutput){
+        //Function to find right node to print all the node id’s and their corresponding right node id. 
+        if (nodeInstance.data==node){
+            if(nodeInstance.nextRight==null){
+                const msg= `Node ${node} - No right node`
+                treeOutput.push(msg);
+            }
+            else if(nodeInstance.nextRight!=null){
+                const msg= `Node ${node} - Right node is ${nodeInstance.nextRight.data}`
+                treeOutput.push(msg);
+            }
+        }
+        else if(nodeInstance.data!=node){
+            if(nodeInstance.left!=null){
+            this.printer(nodeInstance.left, node, treeOutput)
+            }
+            if(nodeInstance.middle!=null){
+            this.printer(nodeInstance.middle, node, treeOutput)
+            }
+            if(nodeInstance.right!=null){
+            this.printer(nodeInstance.right, node, treeOutput)
+            }
+        }
+    }
   }
 
 module.exports = { Tree }
